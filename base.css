@@ -1,0 +1,65 @@
+
+ /* Google Fonts */
+@import url(https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css);
+
+/* Global */
+html{
+  min-height: 100%;
+  overflow: hidden;
+}
+body{
+  height: calc(100vh - 8em);
+  padding: 4em;
+  color: #ff5000;
+  font-family: 'Rounded Mplus 1c';  
+  background-color: #fff;  
+  font-weight: bold;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+}
+.line-1{
+    position: relative;
+    top: 50%;  
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid #ff5000;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
+.line-2{
+  position: relative;
+  top: 50%;  
+  width: 24em;
+  margin: 0 auto;
+  font-size: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;  
+  color: 	#D3D3D3; 
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 13em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color:#ff5000);}
+  to{border-right-color: transparent;}
+}
+
+.wrapper{
+  max-width: 60em;
+  min-width: 45em;
+}
+.profile-section img{
+  width: 40%;
+  display: block;
+}
