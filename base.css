@@ -48,6 +48,7 @@ body{
 #section-2 img{
   width: 30%;
   float: left;
+  margin: 0 0 0 100px;
 }
 #profile-text{
   float: right;
@@ -59,4 +60,7 @@ h2{
 h3{
   margin: 0;
   padding: 0;
+}
+li{
+  list-style-type: none;
 }
