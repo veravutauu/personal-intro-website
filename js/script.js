@@ -7,7 +7,7 @@ $(document).ready(function () {
     navigation: true,
     navigationPosition: 'right',
     showActiveTooltip: true,
-    responsiveWidth: 900,
+    responsiveWidth: 1500,
   });
 
   //methods
