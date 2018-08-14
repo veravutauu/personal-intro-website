@@ -1,7 +1,7 @@
 var ANIMAT_DURATION_EACH_SECTION = 600;
 var ANIMATED_DURATION = 500;
 
-var didMoveUpToSection = 0
+var visitedSections = new Set();
 
 function setupFullPage() {
   $('#fullpage').fullpage({
@@ -15,43 +15,47 @@ function setupFullPage() {
     responsiveWidth: 700,
     onLeave: function (origin, destination, direction) {
       var leavingSection = this;
-      if (direction == 'down') {
-        switch (origin.index) {
-          case 0:
-            willMoveToSection1()
-            break;
-          case 1:
-            willMoveToSection2()
-            break;
-          default:
-            break;
-        }
+      console.log('dest', destination.index)
+      switch (destination.index) {
+        case 2:
+          willMoveToSection2()
+          break;
+        case 1:
+          willMoveToSection1()
+          break;
+        default:
+          break;
       }
     }
   });
 }
 
 function willMoveToSection1() {
-  if (didMoveUpToSection >= 1) {
+  if (visitedSections.has(1)) {
     return
   }
-  didMoveUpToSection = 1
+  visitedSections.add(1)
   // console.log("Will move to section 1")
   $("#section-1 .need-animate-move-up").each(function (indx, el) {
     animateMoveUpIfNeeded($(el))
   })
 }
 
+function delay(callback, ms) {
+  window.setTimeout(() => {
+    callback()
+  }, ms);
+}
+
 function willMoveToSection2() {
-  if (didMoveUpToSection >= 2) {
+  if (visitedSections.has(2)) {
     return
   }
-  didMoveUpToSection = 2
+  visitedSections.add(2)
   // console.log("Will move to section 2")
-  $(".need-animate-move-up").each(function (indx, el) {
+  $("#section-2 .need-animate-move-up").each(function (indx, el) {
     $(el).css('transition-duration', '0.5s');
-    window.setTimeout(() => {
-      console.log('move up ', indx)
+    delay(() => {
       animateMoveUpIfNeeded($(el));
     }, indx * 300);
   })
