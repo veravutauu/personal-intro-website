@@ -10,7 +10,7 @@ function setupFullPage() {
     navigation: true,
     navigationPosition: 'right',
     showActiveTooltip: true,
-    responsiveWidth: 800,
+    responsiveWidth: 700,
     onLeave: function (origin, destination, direction) {
       var leavingSection = this;
 
