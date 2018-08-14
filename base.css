@@ -45,6 +45,8 @@ h4 {
 li {
   list-style-type: none;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
 
 .topic-underline {
@@ -152,7 +154,7 @@ li {
 
 /* Larger than tablet */
 
-@media (min-width: 550px) {
+@media only screen and (min-width: 700px) {
   #section-2-container .row {
     height: 100%;
   }
