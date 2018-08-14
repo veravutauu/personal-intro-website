@@ -130,8 +130,8 @@ li {
 .did-animate-move-up {
   -webkit-transform: translateY(200px);
   transform: translateY(200px);
-  -webkit-animation: moveUp 1.65s ease forwards;
-  animation: moveUp 1.65s ease forwards;
+  -webkit-animation: moveUp 1.25s ease forwards;
+  animation: moveUp 1.25s ease forwards;
 }
 
 .skill-images {
