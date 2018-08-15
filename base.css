@@ -167,6 +167,41 @@ li {
   animation: moveUp 1.25s ease forwards; */
 }
 
+.need-animate-flight-ticket {
+  opacity: 0;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+  transform: translateX(calc(-50vw));
+  transition-delay: 0;
+}
+
+.wiggle-infinitely {
+  /* transform: rotateZ(-12deg); */
+  /* transition: 0.2s; */
+  animation: wiggle 2s ease infinite forwards;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(-12deg);
+  }
+  /* 25% {
+    transform: rotateZ(-15deg);
+  } */
+  50% {
+    transform: rotateZ(12deg);
+  }
+  100% {
+    transform: rotateZ(-12deg);
+  }
+}
+
+.did-animate-flight-ticket {
+  opacity: 1;
+  transform: translateX(0) rotateZ(-12deg);
+  -webkit-transform: translateX(0) rotateZ(-12deg);
+}
+
 .skill-images {
   display: flex;
   width: 100%;

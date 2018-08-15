@@ -17,14 +17,17 @@ function setupFullPage() {
       var leavingSection = this;
       console.log('dest', destination.index)
       switch (destination.index) {
-        case 2:
-          willMoveToSection2()
-          break;
         case 1:
           willMoveToSection1()
-          break;
+          break
+        case 2:
+          willMoveToSection2()
+          break
+        case 3:
+          willMoveToSection3()
+          break
         default:
-          break;
+          break
       }
     }
   });
@@ -61,6 +64,30 @@ function willMoveToSection2() {
   })
 }
 
+function willMoveToSection3() {
+  if (visitedSections.has(3)) {
+    return;
+  }
+  visitedSections.add(3)
+
+  $("#section-3 .need-animate-flight-ticket").each(function (indx, el) {
+    animateFlightTicketIfNeeded($(el))
+  })
+}
+
+function animateFlightTicketIfNeeded(el) {
+  if (!el.hasClass('did-animate-flight-ticket')) {
+    // Animate moving flight ticket into screen
+    el.addClass('did-animate-flight-ticket')
+
+    // Animate wiggling
+    delay(function () {
+      el.animate('')
+      el.addClass('wiggle-infinitely')
+    }, 1200)
+  }
+}
+
 function animateMoveUpIfNeeded(el) {
   if (!el.hasClass('did-animate-move-up')) {
     // el.animate({
@@ -94,7 +121,7 @@ function updateOnScroll() {
 }
 
 function main() {
-  // $(window).scroll(updateOnScroll);
+  // $(window).scroll(onScroll);
 }
 
 $(document).ready(function () {
