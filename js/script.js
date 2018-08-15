@@ -82,7 +82,6 @@ function animateFlightTicketIfNeeded(el) {
 
     // Animate wiggling
     delay(function () {
-      el.animate('')
       el.addClass('wiggle-infinitely')
     }, 1200)
   }
