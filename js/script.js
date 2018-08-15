@@ -1,6 +1,8 @@
 var ANIMAT_DURATION_EACH_SECTION = 600;
 var ANIMATED_DURATION = 500;
 
+var visitedSections = new Set();
+
 function setupFullPage() {
   $('#fullpage').fullpage({
     //options here
@@ -13,45 +15,112 @@ function setupFullPage() {
     responsiveWidth: 700,
     onLeave: function (origin, destination, direction) {
       var leavingSection = this;
-
-      //after leaving section 2
-      if (origin.index == 0 && direction == 'down') {
-        console.log("0 -> 1!");
-        let el = $(".need-animate-move-up")
-        animateMoveUpIfNeeded(el)
-      } else if (origin.index == 1 && direction == 'up') {
-        console.log("1 -> 0!");
+      console.log('dest', destination.index)
+      switch (destination.index) {
+        case 1:
+          willMoveToSection1()
+          break
+        case 2:
+          willMoveToSection2()
+          break
+        case 3:
+          willMoveToSection3()
+          break
+        default:
+          break
       }
     }
   });
 }
 
+function willMoveToSection1() {
+  if (visitedSections.has(1)) {
+    return
+  }
+  visitedSections.add(1)
+  // console.log("Will move to section 1")
+  $("#section-1 .need-animate-move-up").each(function (indx, el) {
+    animateMoveUpIfNeeded($(el))
+  })
+}
+
+function delay(callback, ms) {
+  window.setTimeout(() => {
+    callback()
+  }, ms);
+}
+
+function willMoveToSection2() {
+  if (visitedSections.has(2)) {
+    return
+  }
+  visitedSections.add(2)
+  // console.log("Will move to section 2")
+  $("#section-2 .need-animate-move-up").each(function (indx, el) {
+    $(el).css('transition-duration', '0.5s');
+    delay(() => {
+      animateMoveUpIfNeeded($(el));
+    }, indx * 300);
+  })
+}
+
+function willMoveToSection3() {
+  if (visitedSections.has(3)) {
+    return;
+  }
+  visitedSections.add(3)
+
+  $("#section-3 .need-animate-flight-ticket").each(function (indx, el) {
+    animateFlightTicketIfNeeded($(el))
+  })
+}
+
+function animateFlightTicketIfNeeded(el) {
+  if (!el.hasClass('did-animate-flight-ticket')) {
+    // Animate moving flight ticket into screen
+    el.addClass('did-animate-flight-ticket')
+
+    // Animate wiggling
+    delay(function () {
+      el.addClass('wiggle-infinitely')
+    }, 1200)
+  }
+}
+
 function animateMoveUpIfNeeded(el) {
   if (!el.hasClass('did-animate-move-up')) {
-    el.animate({
-      opacity: "1.0"
-    }, ANIMAT_DURATION_EACH_SECTION)
+    // el.animate({
+    //   opacity: "1.0"
+    // }, ANIMAT_DURATION_EACH_SECTION)
     el.addClass('did-animate-move-up')
   }
 }
 
 function updateOnScroll() {
-  let $sections = $(".need-animate-move-up")
+  let $sections = $(".section")
   $.each($sections, function (indx, _el) {
     var el = $(_el)
     var topDivHeight = el.offset().top;
     var viewPortSize = $(window).height();
 
     var windowScrollTop = $(window).scrollTop();
-    if (windowScrollTop > topDivHeight - viewPortSize + 44 &&
-      !el.hasClass('did-animate-move-up')) {
-      animateMoveUpIfNeeded(el)
+    if (windowScrollTop > topDivHeight - viewPortSize + 44) {
+      switch (indx) {
+        case 1:
+          willMoveToSection1()
+          break;
+        case 2:
+          willMoveToSection2()
+          break;
+        default:
+          break;
+      }
     }
   })
 }
 
 function main() {
-  $(window).scroll(updateOnScroll);
+  // $(window).scroll(onScroll);
 }
 
 $(document).ready(function () {
