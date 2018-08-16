@@ -138,20 +138,25 @@ function updateGrid(gridContainerId, baseGridItemClass) {
     return
   }
 
-  var ncols = 7;
-  // var gridSize = style.getPropertyValue('--gridSize')
-  var gridSize = Math.ceil($(window).width() / ncols)
-  const MAX_GRID_SIZE = 100
-  if (gridSize > MAX_GRID_SIZE) {
-    gridSize = MAX_GRID_SIZE
-    ncols = Math.ceil($(window).width() / gridSize)
-  }
+  const ncols = 8;
+  const nrows = 8;
+
+  const MAX_GRID_SIZE = 160;
+  const availableWidth = container.width();
+  const availableHeight = $(window).height();
+
+  console.log(availableWidth, availableHeight);
+  var gridSize = Math.ceil(availableWidth / ncols);
+  // if (gridSize > MAX_GRID_SIZE) {
+  //   gridSize = MAX_GRID_SIZE
+  //   ncols = Math.ceil(availableWidth / gridSize)
+  // }
   // var nrows = style.getPropertyValue('--rows')
-  var nrows = Math.ceil($(window).height() / gridSize)
+  // var nrows = Math.ceil(availableHeight / gridSize)
   var totalN = ncols * nrows
 
   container.css({
-    width: '100vw',
+    width: '100%',
     display: 'grid',
     'grid-template-rows': (gridSize + 'px ').repeat(nrows),
     'grid-template-columns': (gridSize + 'px ').repeat(ncols),
@@ -189,7 +194,7 @@ function updateGrid(gridContainerId, baseGridItemClass) {
 }
 
 var resizeTimeout;
-var throttlePeriod = 500;
+var throttlePeriod = 200;
 
 function main() {
   // $(window).scroll(onScroll);

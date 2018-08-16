@@ -88,7 +88,6 @@ li {
   min-height: 200px;
   height: 100%;
   padding: 60px 20px; }
-
 #section-1 #profile-container {
   height: 100%; }
   #section-1 #profile-container .container {
@@ -110,9 +109,10 @@ li {
 
 .flight-image-container img {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   display: block;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 0 12px; }
 
 .webdev-description {
   text-align: center;
@@ -166,16 +166,22 @@ li {
 
 .skill-images {
   display: flex;
-  width: 100%; }
+  width: 100%;
+  flex-wrap: wrap; }
   .skill-images .skill-image-container {
     flex: 33.33%;
-    /* padding: 5px; */
     position: relative; }
     .skill-images .skill-image-container img {
       width: auto;
       height: auto;
       max-width: 100%;
-      max-height: 300px; }
+      max-height: 100%;
+      display: block;
+      margin: 0 auto; }
+    @media only screen and (max-width: 700px) {
+      .skill-images .skill-image-container {
+        flex: 100%;
+        max-height: 200px; } }
 
 #section-2 .skill-description {
   text-align: center;
@@ -210,6 +216,10 @@ li {
     transform: translate(-50%, -50%);
     width: 100%;
     height: auto; } }
+#root-grid-container {
+  max-width: 960px;
+  margin: 0 auto; }
+
 #grid-section-container {
   overflow: hidden;
   max-height: 100vh;
