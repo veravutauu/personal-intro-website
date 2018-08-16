@@ -227,7 +227,7 @@ function main() {
       resizeTimeout = setTimeout(function () {
         drawGrid('grid-section-container', 'base-grid-item');
         prepareGridContainer('inner-grid')
-        arrangeImagesInGrid('inner-grid')
+        // arrangeImagesInGrid('inner-grid')
         resizeTimeout = null;
       }, throttlePeriod)
     }
@@ -249,7 +249,7 @@ function arrangeImagesInGrid(gridContainerId) {
     [4, 6, 7, 9]
   ].map(nums => nums.map(String))
 
-  $('.inner-base-grid-item').remove();
+  // $('.inner-base-grid-item').remove();
 
   for (let ind = 0; ind < nimgs; ind++) {
     const layout = imageLayouts[ind]
