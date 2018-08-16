@@ -15,7 +15,6 @@ function setupFullPage() {
     responsiveWidth: 700,
     onLeave: function (origin, destination, direction) {
       var leavingSection = this;
-      console.log('dest', destination.index)
       switch (destination.index) {
         case 1:
           willMoveToSection1()
@@ -119,11 +118,96 @@ function updateOnScroll() {
   })
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function updateGrid(gridContainerId, baseGridItemClass) {
+  const gridContainerSelectorId = '#' + gridContainerId
+  const baseGridItemSelectorClass = '.' + baseGridItemClass
+
+  var container = $(gridContainerSelectorId)
+
+  if (container.length <= 0) {
+    console.error('No grid container with selector ' + gridContainerSelectorId + ' found.')
+    return
+  }
+
+  var ncols = 7;
+  // var gridSize = style.getPropertyValue('--gridSize')
+  var gridSize = Math.ceil($(window).width() / ncols)
+  const MAX_GRID_SIZE = 100
+  if (gridSize > MAX_GRID_SIZE) {
+    gridSize = MAX_GRID_SIZE
+    ncols = Math.ceil($(window).width() / gridSize)
+  }
+  // var nrows = style.getPropertyValue('--rows')
+  var nrows = Math.ceil($(window).height() / gridSize)
+  var totalN = ncols * nrows
+
+  container.css({
+    width: '100vw',
+    display: 'grid',
+    'grid-template-rows': (gridSize + 'px ').repeat(nrows),
+    'grid-template-columns': (gridSize + 'px ').repeat(ncols),
+    'grid-gap': '0px',
+    overflow: 'hidden',
+  })
+
+  // Clear all items
+  $(baseGridItemSelectorClass).remove();
+
+  for (let i = 0; i < totalN; i++) {
+    let cssContent = {
+      width: gridSize,
+      height: gridSize,
+      'min-height': gridSize,
+    }
+    if (i < ncols) {
+      cssContent['border-top'] = '1px dashed #000000';
+    }
+    if (i % ncols == 0) {
+      cssContent['border-left'] = '1px dashed #000000';
+    }
+    const el = $('<div/>', {
+      'class': baseGridItemClass,
+      'id': baseGridItemClass + '-' + i,
+      'css': cssContent
+    })
+    // el.hover(function () {
+    //   $(this).css('background-color', getRandomColor())
+    // }, function () {
+    //   $(this).css('background-color', 'transparent');
+    // })
+    el.appendTo(container)
+  }
+}
+
+var resizeTimeout;
+var throttlePeriod = 500;
+
 function main() {
   // $(window).scroll(onScroll);
+  $(window).resize(function () {
+    if (!resizeTimeout) {
+      resizeTimeout = setTimeout(function () {
+        updateGrid('grid-section-container', 'base-grid-item');
+        updateGrid('inner-grid', 'inner-base-grid-item');
+        resizeTimeout = null;
+      }, throttlePeriod)
+    }
+  });
 }
+
 
 $(document).ready(function () {
   setupFullPage()
+  updateGrid('grid-section-container', 'base-grid-item');
+  updateGrid('inner-grid', 'inner-base-grid-item');
   main()
 });
