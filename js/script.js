@@ -127,7 +127,29 @@ function getRandomColor() {
   return color;
 }
 
-function updateGrid(gridContainerId, baseGridItemClass) {
+function prepareGridContainer(gridContainerId) {
+  const gridContainerSelectorId = '#' + gridContainerId
+  var container = $(gridContainerSelectorId)
+
+  if (container.length <= 0) {
+    console.error('No grid container with selector ' + gridContainerSelectorId + ' found.')
+    return
+  }
+  const ncols = 8;
+  const nrows = 5;
+  const availableWidth = container.width();
+  var gridSize = Math.ceil(availableWidth / ncols);
+  container.css({
+    width: '100%',
+    display: 'grid',
+    'grid-template-rows': (gridSize + 'px ').repeat(nrows),
+    'grid-template-columns': (gridSize + 'px ').repeat(ncols),
+    'grid-gap': '0px',
+  })
+  return container
+}
+
+function drawGrid(gridContainerId, baseGridItemClass) {
   const gridContainerSelectorId = '#' + gridContainerId
   const baseGridItemSelectorClass = '.' + baseGridItemClass
 
@@ -139,13 +161,11 @@ function updateGrid(gridContainerId, baseGridItemClass) {
   }
 
   const ncols = 8;
-  const nrows = 8;
+  const nrows = 5;
 
   const MAX_GRID_SIZE = 160;
   const availableWidth = container.width();
   const availableHeight = $(window).height();
-
-  console.log(availableWidth, availableHeight);
   var gridSize = Math.ceil(availableWidth / ncols);
   // if (gridSize > MAX_GRID_SIZE) {
   //   gridSize = MAX_GRID_SIZE
@@ -161,23 +181,27 @@ function updateGrid(gridContainerId, baseGridItemClass) {
     'grid-template-rows': (gridSize + 'px ').repeat(nrows),
     'grid-template-columns': (gridSize + 'px ').repeat(ncols),
     'grid-gap': '0px',
-    overflow: 'hidden',
   })
 
   // Clear all items
   $(baseGridItemSelectorClass).remove();
+
+  const gridLineStyle = '1px solid #ddd'
 
   for (let i = 0; i < totalN; i++) {
     let cssContent = {
       width: gridSize,
       height: gridSize,
       'min-height': gridSize,
+      'border-right': gridLineStyle,
+      'border-bottom': gridLineStyle
     }
+    // Draw closing border for the first row and frist column.
     if (i < ncols) {
-      cssContent['border-top'] = '1px dashed #000000';
+      cssContent['border-top'] = gridLineStyle;
     }
     if (i % ncols == 0) {
-      cssContent['border-left'] = '1px dashed #000000';
+      cssContent['border-left'] = gridLineStyle;
     }
     const el = $('<div/>', {
       'class': baseGridItemClass,
@@ -201,18 +225,74 @@ function main() {
   $(window).resize(function () {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(function () {
-        updateGrid('grid-section-container', 'base-grid-item');
-        updateGrid('inner-grid', 'inner-base-grid-item');
+        drawGrid('grid-section-container', 'base-grid-item');
+        prepareGridContainer('inner-grid')
+        arrangeImagesInGrid('inner-grid')
         resizeTimeout = null;
       }, throttlePeriod)
     }
   });
 }
 
+function arrangeImagesInGrid(gridContainerId) {
+  const gridContainerSelectorId = '#' + gridContainerId
+  const container = $(gridContainerSelectorId)
+  const nimgs = 8
+  const imageLayouts = [
+    [1, 3, 2, 4],
+    [1, 2, 6, 7],
+    [2, 3, 8, 9],
+    [3, 4, 4, 5],
+    [3, 4, 7, 8],
+    [5, 6, 3, 4],
+    [5, 6, 5, 6],
+    [4, 6, 7, 9]
+  ].map(nums => nums.map(String))
+
+  $('.inner-base-grid-item').remove();
+
+  for (let ind = 0; ind < nimgs; ind++) {
+    const layout = imageLayouts[ind]
+    let r0, r1, c0, c1;
+    [r0, r1, c0, c1] = layout
+    const element = $('<div/>', {
+      'id': 'grid-image-item-' + ind,
+      'class': 'inner-base-grid-item',
+      'css': {
+        'grid-row-start': r0,
+        'grid-row-end': r1,
+        'grid-column-start': c0,
+        'grid-column-end': c1,
+        'background-color': 'green',
+      }
+    })
+
+    element.append($('<img>', {
+      src: '/img/grid-imgs/grid-img-' + ind + '.png',
+      alt: 'grid-img-' + ind
+    }))
+
+    element.appendTo(container)
+  }
+
+  const totalN = 40;
+  for (let ind = 0; ind < totalN - nimgs; ind++) {
+    const el = $('<div/>', {
+      'class': 'inner-base-grid-item',
+      'css': {
+
+      }
+    })
+
+    el.appendTo(container)
+  }
+}
+
 
 $(document).ready(function () {
   setupFullPage()
-  updateGrid('grid-section-container', 'base-grid-item');
-  updateGrid('inner-grid', 'inner-base-grid-item');
+  drawGrid('grid-section-container', 'base-grid-item');
+  prepareGridContainer('inner-grid')
+  arrangeImagesInGrid('inner-grid')
   main()
 });
