@@ -116,14 +116,33 @@ li {
 
 .webdev-description {
   text-align: center;
-  padding: 80px 0 0 0;
+  padding: 60px 0 0 0;
   color: black; }
 
-.webdev-image-container img {
-  width: 100%;
-  max-width: 400px;
+.webdev-image-container {
+  position: relative; }
+  .webdev-image-container #hidden-img-helper {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    visibility: hidden; }
+
+.webdev-mac-images-root {
   display: block;
-  margin: 0 auto; }
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0); }
+  .webdev-mac-images-root img {
+    width: 100%;
+    position: absolute; }
+  .webdev-mac-images-root .need-animate-appear {
+    opacity: 0; }
 
 .need-animate-move-up {
   opacity: 0;

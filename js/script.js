@@ -25,6 +25,9 @@ function setupFullPage() {
         case 3:
           willMoveToSection3()
           break
+        case 4:
+          willMoveToSection4()
+          break
         default:
           break
       }
@@ -84,6 +87,25 @@ function animateFlightTicketIfNeeded(el) {
       el.addClass('wiggle-infinitely')
     }, 1200)
   }
+}
+
+function animateWebdevAppearIfNeeded(el, duration, delay_duration) {
+  if (!el.hasClass('did-animate-appear')) {
+    el.addClass('did-animate-appear')
+    el.delay(delay_duration).animate({
+      'opacity': 1
+    });
+  }
+}
+
+function willMoveToSection4() {
+  if (visitedSections.has(4)) {
+    return;
+  }
+  visitedSections.add(4)
+  $('#section-4 .need-animate-appear').each(function (indx, el) {
+    animateWebdevAppearIfNeeded($(el), 600, 300 + 500 * indx)
+  })
 }
 
 function animateMoveUpIfNeeded(el) {
