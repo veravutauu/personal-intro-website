@@ -301,6 +301,9 @@ li {
   margin: 0 auto;
   z-index: -1;
   overflow: visible;
+  @media only screen and (max-width: 700px) {
+    max-width: 100%;
+  }
 }
 
 #grid-section-container {
@@ -314,10 +317,9 @@ li {
 .base-grid-item {
   font-size: initial;
   box-sizing: border-box;
-  position: relative;
-  &:hover {
-    background-color: blue;
-  }
+  position: relative; // &:hover {
+  //   background-color: blue;
+  // }
 }
 
 #inner-grid {

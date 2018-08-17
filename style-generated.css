@@ -240,6 +240,9 @@ li {
   margin: 0 auto;
   z-index: -1;
   overflow: visible; }
+  @media only screen and (max-width: 700px) {
+    #root-grid-container {
+      max-width: 100%; } }
 
 #grid-section-container {
   display: grid;
@@ -252,8 +255,6 @@ li {
   font-size: initial;
   box-sizing: border-box;
   position: relative; }
-  .base-grid-item:hover {
-    background-color: blue; }
 
 #inner-grid {
   width: 100%;

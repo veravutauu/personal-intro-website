@@ -149,7 +149,7 @@ function getRandomColor() {
   return color;
 }
 
-function prepareGridContainer(gridContainerId) {
+function prepareGridContainer(gridContainerId, isMobile = false) {
   const gridContainerSelectorId = '#' + gridContainerId
   var container = $(gridContainerSelectorId)
 
@@ -157,8 +157,8 @@ function prepareGridContainer(gridContainerId) {
     console.error('No grid container with selector ' + gridContainerSelectorId + ' found.')
     return
   }
-  const ncols = 8;
-  const nrows = 5;
+  const ncols = isMobile ? 6 : 8;
+  const nrows = isMobile ? 16 : 5;
   const availableWidth = container.width();
   var gridSize = Math.ceil(availableWidth / ncols);
   container.css({
@@ -171,7 +171,7 @@ function prepareGridContainer(gridContainerId) {
   return container
 }
 
-function drawGrid(gridContainerId, baseGridItemClass) {
+function drawGrid(gridContainerId, baseGridItemClass, isMobile = false) {
   const gridContainerSelectorId = '#' + gridContainerId
   const baseGridItemSelectorClass = '.' + baseGridItemClass
 
@@ -182,8 +182,8 @@ function drawGrid(gridContainerId, baseGridItemClass) {
     return
   }
 
-  const ncols = 8;
-  const nrows = 5;
+  const ncols = isMobile ? 6 : 8;
+  const nrows = isMobile ? 16 : 5;
 
   const MAX_GRID_SIZE = 160;
   const availableWidth = container.width();
@@ -241,37 +241,62 @@ function drawGrid(gridContainerId, baseGridItemClass) {
 
 var resizeTimeout;
 var throttlePeriod = 200;
+var currentlyMobile = true;
 
 function main() {
   // $(window).scroll(onScroll);
   $(window).resize(function () {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(function () {
-        drawGrid('grid-section-container', 'base-grid-item');
-        prepareGridContainer('inner-grid')
+        const isMobile = $(window).width() <= 700
+        drawGrid('grid-section-container', 'base-grid-item', isMobile);
+        prepareGridContainer('inner-grid', isMobile)
+        if (isMobile != currentlyMobile) {
+          arrangeImagesInGrid('inner-grid', isMobile, true)
+        }
+        // arrangeImagesInGrid('inner-grid', isMobile, true)
         // arrangeImagesInGrid('inner-grid')
         resizeTimeout = null;
+        currentlyMobile = isMobile
       }, throttlePeriod)
     }
   });
 }
 
-function arrangeImagesInGrid(gridContainerId) {
+function arrangeImagesInGrid(gridContainerId, isMobile = false, clear = false) {
   const gridContainerSelectorId = '#' + gridContainerId
   const container = $(gridContainerSelectorId)
   const nimgs = 8
-  const imageLayouts = [
-    [1, 3, 2, 4],
-    [1, 2, 6, 7],
-    [2, 3, 8, 9],
-    [3, 4, 4, 5],
-    [3, 4, 7, 8],
-    [5, 6, 3, 4],
-    [5, 6, 5, 6],
-    [4, 6, 7, 9]
-  ].map(nums => nums.map(String))
+  let imageLayouts;
+  if (isMobile) {
+    imageLayouts = Array.from(new Array(nimgs), (_, k) => k + 1).map(i => {
+      // 1 3 3 5 5 7
+      const r0 = 2 * i - 1
+      const r1 = 2 * i + 1
+      if (i % 2 == 0) {
+        // left
+        return [r0, r1, 2, 4]
+      } else {
+        // right
+        return [r0, r1, 4, 6]
+      }
+    }).map(nums => nums.map(String))
+  } else {
+    imageLayouts = [
+      [1, 3, 2, 4],
+      [1, 2, 6, 7],
+      [2, 3, 8, 9],
+      [3, 4, 4, 5],
+      [3, 4, 7, 8],
+      [5, 6, 3, 4],
+      [5, 6, 5, 6],
+      [4, 6, 7, 9]
+    ].map(nums => nums.map(String))
+  }
 
-  // $('.inner-base-grid-item').remove();
+  if (clear) {
+    $('.inner-base-grid-item').remove();
+  }
 
   for (let ind = 0; ind < nimgs; ind++) {
     const layout = imageLayouts[ind]
@@ -313,8 +338,10 @@ function arrangeImagesInGrid(gridContainerId) {
 
 $(document).ready(function () {
   setupFullPage()
-  drawGrid('grid-section-container', 'base-grid-item');
-  prepareGridContainer('inner-grid')
-  arrangeImagesInGrid('inner-grid')
+  const isMobile = $(window).width() <= 700
+  currentlyMobile = isMobile
+  drawGrid('grid-section-container', 'base-grid-item', isMobile);
+  prepareGridContainer('inner-grid', isMobile)
+  arrangeImagesInGrid('inner-grid', isMobile)
   main()
 });
