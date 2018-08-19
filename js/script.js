@@ -158,7 +158,7 @@ function prepareGridContainer(gridContainerId, isMobile = false) {
     return
   }
   const ncols = isMobile ? 6 : 8;
-  const nrows = isMobile ? 16 : 5;
+  const nrows = isMobile ? 18 : 5;
   const availableWidth = container.width();
   var gridSize = Math.ceil(availableWidth / ncols);
   container.css({
@@ -183,7 +183,7 @@ function drawGrid(gridContainerId, baseGridItemClass, isMobile = false) {
   }
 
   const ncols = isMobile ? 6 : 8;
-  const nrows = isMobile ? 16 : 5;
+  const nrows = isMobile ? 18 : 5;
 
   const MAX_GRID_SIZE = 160;
   const availableWidth = container.width();
