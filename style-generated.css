@@ -336,7 +336,7 @@ li {
     width: 0; } }
 .town-container .town-text {
   position: absolute;
-  top: 40%;
+  top: calc((100vh - 100vw*(0.416))/2);
   left: 50%;
   transform: translate(-50%, -50%);
   color: white; }
