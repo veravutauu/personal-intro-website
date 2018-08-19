@@ -353,6 +353,7 @@ li {
 
 .town-container {
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   background-image: linear-gradient(to bottom, #0A2342, #283E51);
@@ -372,6 +373,8 @@ li {
     /* not to stand out from div */
     margin: auto auto 0;
     /* position to bottom and center */
+    min-height: 200px;
+    object-fit: cover;
   }
 }
 
