@@ -3,7 +3,8 @@
 /* Global */
 html {
   min-height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  max-width: 100vw; }
 
 * {
   box-sizing: border-box; }
@@ -51,20 +52,19 @@ li {
 .name-label {
   position: relative;
   top: 50%;
-  width: 24em;
   margin: 0 auto;
   border-right: 2px solid #ff5000;
   font-size: 180%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  width: 100%;
   transform: translateY(-50%);
   font-weight: bold; }
 
 .scroll-down-label {
   position: relative;
   top: 50%;
-  width: 24em;
   margin: 0 auto;
   font-size: 100%;
   text-align: center;
@@ -240,7 +240,7 @@ li {
   max-width: 80%;
   margin: 0 auto;
   z-index: -1;
-  overflow: visible; }
+  overflow: hidden; }
   @media only screen and (max-width: 700px) {
     #root-grid-container {
       max-width: 100%; } }
@@ -249,7 +249,7 @@ li {
   display: grid;
   position: relative;
   z-index: 0;
-  overflow: visible; }
+  overflow: hidden; }
 
 .base-grid-item {
   font-size: initial;
