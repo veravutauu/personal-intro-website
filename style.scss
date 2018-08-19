@@ -235,19 +235,19 @@ li {
   .skill-image-container {
     flex: 33.33%;
     position: relative;
-    img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
-      margin: 0 auto;
-    }
     @media only screen and (max-width: 700px) {
       flex: 100%;
-      max-height: 300px;
     }
   }
+}
+
+.skill-image-container img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: auto;
 }
 
 #section-2 .skill-description {

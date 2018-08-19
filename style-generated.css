@@ -191,17 +191,17 @@ li {
   .skill-images .skill-image-container {
     flex: 33.33%;
     position: relative; }
-    .skill-images .skill-image-container img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
-      margin: 0 auto; }
     @media only screen and (max-width: 700px) {
       .skill-images .skill-image-container {
-        flex: 100%;
-        max-height: 300px; } }
+        flex: 100%; } }
+
+.skill-image-container img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: auto; }
 
 #section-2 .skill-description {
   text-align: center;
