@@ -6,6 +6,7 @@
 html {
   min-height: 100%;
   overflow: hidden;
+  max-width: 100vw;
 }
 
 * {
@@ -62,13 +63,13 @@ li {
 .name-label {
   position: relative;
   top: 50%;
-  width: 24em;
   margin: 0 auto;
   border-right: 2px solid #ff5000;
   font-size: 180%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  width: 100%;
   transform: translateY(-50%);
   font-weight: bold;
 }
@@ -76,7 +77,6 @@ li {
 .scroll-down-label {
   position: relative;
   top: 50%;
-  width: 24em;
   margin: 0 auto;
   font-size: 100%;
   text-align: center;
@@ -235,19 +235,19 @@ li {
   .skill-image-container {
     flex: 33.33%;
     position: relative;
-    img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
-      margin: 0 auto;
-    }
     @media only screen and (max-width: 700px) {
       flex: 100%;
-      max-height: 300px;
     }
   }
+}
+
+.skill-image-container img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: auto;
 }
 
 #section-2 .skill-description {
@@ -301,18 +301,17 @@ li {
   max-width: 80%;
   margin: 0 auto;
   z-index: -1;
-  overflow: visible;
+  overflow: hidden;
   @media only screen and (max-width: 700px) {
     max-width: 100%;
   }
 }
 
 #grid-section-container {
-  display: grid;
-  max-height: 100vh;
+  display: grid; // max-height: 100vh;
   position: relative;
   z-index: 0;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .base-grid-item {
@@ -345,9 +344,86 @@ li {
   box-sizing: border-box;
   position: relative;
   opacity: 0.5;
-  transition: opacity 0.3s, transform 0.1s ease-in;
+  transition: opacity 0.3s, transform 0.3s ease-in;
   &:hover {
     opacity: 1.0;
-    transform: scale(1.1, 1.1);
+    transform: scale(1.2, 1.2);
   }
+}
+
+.town-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #0A2342, #283E51);
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    /* to keep proportions */
+    height: auto;
+    /* to keep proportions */
+    max-width: 100%;
+    /* not to stand out from div */
+    // max-height: 60%;
+    /* not to stand out from div */
+    margin: auto auto 0;
+    /* position to bottom and center */
+    min-height: 200px;
+    object-fit: cover;
+  }
+}
+
+.falling-star {
+  z-index: 9;
+  width: 190px;
+  height: 2px;
+  background: linear-gradient( 135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 1) 33%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  border-radius: 50%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: falling;
+  animation-timing-function: cubic-bezier(0.33, 0.19, 0.26, 1.3); // top: -70px;
+  top: -18%;
+  transform: rotate(-45deg) translate3d(0, 0, 0);
+  will-change: transform, width, opacity;
+  &:nth-of-type(1) {
+    // right: 40px;
+    right: 10%;
+    animation-delay: 3.2s;
+  }
+  &:nth-of-type(2) {
+    // right: 200px;
+    right: 50%;
+    animation-delay: 6s;
+    animation-iteration-count: 4;
+  }
+  &:nth-of-type(3) {
+    // right: -180px;
+    right: -40%;
+    animation-duration: 3s;
+    animation-delay: 1.8s;
+  }
+}
+
+@keyframes falling {
+  60%,
+  100% {
+    transform: rotate(-40deg) translate3d(-560px, 0, 0);
+    opacity: 0.5;
+    width: 0;
+  }
+}
+
+.town-container .town-text {
+  position: absolute;
+  top: calc((100vh - 100vw*(0.32))/2);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
