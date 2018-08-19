@@ -351,3 +351,27 @@ li {
     transform: scale(1.1, 1.1);
   }
 }
+
+.town-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #0A2342, #283E51);
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    /* to keep proportions */
+    height: auto;
+    /* to keep proportions */
+    max-width: 100%;
+    /* not to stand out from div */
+    max-height: 100%;
+    /* not to stand out from div */
+    margin: auto auto 0;
+    /* position to bottom and center */
+  }
+}
