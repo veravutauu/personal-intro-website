@@ -277,10 +277,10 @@ li {
   box-sizing: border-box;
   position: relative;
   opacity: 0.5;
-  transition: opacity 0.3s, transform 0.1s ease-in; }
+  transition: opacity 0.3s, transform 0.3s ease-in; }
   .inner-base-grid-item:hover {
     opacity: 1.0;
-    transform: scale(1.1, 1.1); }
+    transform: scale(1.2, 1.2); }
 
 .town-container {
   position: relative;

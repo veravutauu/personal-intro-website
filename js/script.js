@@ -230,11 +230,6 @@ function drawGrid(gridContainerId, baseGridItemClass, isMobile = false) {
       'id': baseGridItemClass + '-' + i,
       'css': cssContent
     })
-    // el.hover(function () {
-    //   $(this).css('background-color', getRandomColor())
-    // }, function () {
-    //   $(this).css('background-color', 'transparent');
-    // })
     el.appendTo(container)
   }
 }
