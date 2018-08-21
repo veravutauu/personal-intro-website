@@ -305,7 +305,7 @@ function arrangeImagesInGrid(gridContainerId, isMobile = false, clear = false) {
         'grid-row-end': r1,
         'grid-column-start': c0,
         'grid-column-end': c1,
-        'background-color': 'green',
+        'background-color': 'clear',
       }
     })
 

@@ -347,7 +347,7 @@ li {
   max-width: 80%;
   margin: 0 auto;
   z-index: -1;
-  overflow: hidden;
+  overflow: visible;
   @media only screen and (max-width: 700px) {
     max-width: 100%;
   }
@@ -357,7 +357,7 @@ li {
   display: grid; // max-height: 100vh;
   position: relative;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .base-grid-item {
@@ -382,6 +382,19 @@ li {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+#inner-grid-text {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  @media only screen and (max-width: 700px) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 18;
+    grid-row-end: 19;
   }
 }
 
