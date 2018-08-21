@@ -385,6 +385,19 @@ li {
   }
 }
 
+#inner-grid-text {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  @media only screen and (max-width: 700px) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 18;
+    grid-row-end: 19;
+  }
+}
+
 .inner-base-grid-item {
   font-size: initial;
   box-sizing: border-box;
