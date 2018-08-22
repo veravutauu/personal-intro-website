@@ -44,13 +44,17 @@ function willMoveToSection1_5() {
     return
   }
   visitedSections.add(1.5)
-  const myText1 = 'Hello World'
-  const myText2 = 'Hello 2'
-  const fontSize = '100px'
+  const myText1 = 'チャレンジ'
+  const myText2 = '精神'
+  const fontSize = '95px'
+  const fontWeight = 'bold'
+  const stroke = '#ff5000'
+  const fill = 'transparent'
+  const strokeWidth = '2px'
 
   const elementToInsert = `
   <svg height="250" width="100%" id="svg-animation">
-    <text id="text" x="0" y="80" stroke-dashoffset="560" style="font-weight:bold;font-size:${fontSize};stroke:#ff5000;fill:transparent;stroke-width:1px;stroke-dasharray:560;">
+    <text id="text" x="0" y="80" stroke-dashoffset="560" style="font-weight:${fontWeight};font-size:${fontSize};stroke:${stroke};fill:${fill};stroke-width:${strokeWidth};stroke-dasharray:560;">
       <tspan x="0" y="80">${myText1}</tspan>
       <tspan x="0" y="180">${myText2}</tspan>
     </text>
