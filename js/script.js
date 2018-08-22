@@ -15,9 +15,13 @@ function setupFullPage() {
     responsiveWidth: 700,
     onLeave: function (origin, destination, direction) {
       var leavingSection = this;
-      switch (destination.index) {
+      var destinationId = parseFloat(destination.item.id.split('-')[1]);
+      switch (destinationId) {
         case 1:
           willMoveToSection1()
+          break
+        case 1.5:
+          willMoveToSection1_5()
           break
         case 2:
           willMoveToSection2()
@@ -33,6 +37,23 @@ function setupFullPage() {
       }
     }
   });
+}
+
+function willMoveToSection1_5() {
+  if (visitedSections.has(1.5)) {
+    return
+  }
+  visitedSections.add(1.5)
+  console.log('enter 1.5')
+  const elementToInsert = `<svg height="250" width="800" id="svg-animation">
+  <text id="text" x="0" y="80" stroke-dashoffset="560" style="font-weight:bold;font-size:100px;stroke:#ff5000;fill:transparent;stroke-width:1px;stroke-dasharray:560;">
+    <tspan x="0" y="80">ANIMATED SVG</tspan>
+    <tspan x="0" y="180">LINE DRAWING</tspan>
+  </text>
+  <animate xlink:href="#text" attributeName="stroke-dashoffset" attributeType="XML" to="0" dur="1.5s" fill="freeze" begin="0s"
+  />
+</svg>`
+  $('#svg-animation-container').append(elementToInsert)
 }
 
 function willMoveToSection1() {
@@ -56,6 +77,7 @@ function willMoveToSection2() {
   if (visitedSections.has(2)) {
     return
   }
+  console.log('move up!')
   visitedSections.add(2)
   // console.log("Will move to section 2")
   $("#section-2 .need-animate-move-up").each(function (indx, el) {
