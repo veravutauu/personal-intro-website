@@ -44,15 +44,20 @@ function willMoveToSection1_5() {
     return
   }
   visitedSections.add(1.5)
-  console.log('enter 1.5')
-  const elementToInsert = `<svg height="250" width="800" id="svg-animation">
-  <text id="text" x="0" y="80" stroke-dashoffset="560" style="font-weight:bold;font-size:100px;stroke:#ff5000;fill:transparent;stroke-width:1px;stroke-dasharray:560;">
-    <tspan x="0" y="80">ANIMATED SVG</tspan>
-    <tspan x="0" y="180">LINE DRAWING</tspan>
-  </text>
-  <animate xlink:href="#text" attributeName="stroke-dashoffset" attributeType="XML" to="0" dur="1.5s" fill="freeze" begin="0s"
-  />
-</svg>`
+  const myText1 = 'Hello World'
+  const myText2 = 'Hello 2'
+  const fontSize = '100px'
+
+  const elementToInsert = `
+  <svg height="250" width="100%" id="svg-animation">
+    <text id="text" x="0" y="80" stroke-dashoffset="560" style="font-weight:bold;font-size:${fontSize};stroke:#ff5000;fill:transparent;stroke-width:1px;stroke-dasharray:560;">
+      <tspan x="0" y="80">${myText1}</tspan>
+      <tspan x="0" y="180">${myText2}</tspan>
+    </text>
+    <animate xlink:href="#text" attributeName="stroke-dashoffset" attributeType="XML" to="0" dur="1.5s" fill="freeze" begin="0s"
+    />
+  </svg>
+  `
   $('#svg-animation-container').append(elementToInsert)
 }
 
